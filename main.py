@@ -1,3 +1,4 @@
+import warnings
 from data_fetcher import DataFetchingAgent
 from prediction_engine import PredictionEngine
 from llm_predictor import LLMPredictor
@@ -6,42 +7,38 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
-from pycoingecko import CoinGeckoAPI
 from dotenv import load_dotenv
 
-# Load environment variables
+# Suppress deprecation warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
+
 load_dotenv()
 
 console = Console()
-cg = CoinGeckoAPI()
 
 
-def parse_price(price_str):
-    try:
-        return float(price_str.replace(',', ''))
-    except ValueError:
-        return None
+def get_user_input(prompt, default_value=None):
+    while True:
+        user_input = console.input(f"{prompt} [{default_value or ''}] : ")
+        if not user_input:
+            if default_value is not None:
+                return default_value
+            else:
+                continue
+        try:
+            return int(user_input)
+        except ValueError:
+            console.print(
+                "[bold red]Error:[/bold red] Invalid input. Please enter a number.")
 
 
 def validate_coin_id(coin_id):
     try:
-        cg.get_coin_by_id(coin_id)
+        data_agent = DataFetchingAgent()
+        data_agent.cg.get_coin_by_id(coin_id)
         return True
     except Exception:
         return False
-
-
-def get_user_input(prompt, default, type_func=int):
-    while True:
-        user_input = console.input(
-            f"[bold cyan]{prompt} (default: {default}): [/bold cyan]")
-        if user_input == "":
-            return default
-        try:
-            return type_func(user_input)
-        except ValueError:
-            console.print(f"[bold red]Invalid input. Please enter a valid {
-                          type_func.__name__}.[/bold red]")
 
 
 def main():
@@ -86,44 +83,31 @@ def main():
                 "[bold red]Error:[/bold red] No valid data after preparation. Please check the data quality and preparation process.")
             return
 
-        prediction_engine.train(X, y)
+        metrics = prediction_engine.train(X, y)
 
         # Make predictions
         latest_data = X.iloc[-1].to_frame().T
-        ml_prediction, ml_probabilities = prediction_engine.predict(
+        ml_prediction, ml_confidence, ml_metrics = prediction_engine.predict(
             latest_data)
 
         current_price = df['price'].iloc[-1]
-        market_data = df.tail(3)[['price', 'high', 'low', 'volume', 'yf_close', 'yf_volume',
-                                  'av_close', 'av_volume', 'bb_upper', 'bb_middle', 'bb_lower']].to_string()
-        technical_indicators = X.tail(3).to_string()
+
+        # Reduce the amount of data sent to LLM predictor
+        market_data = df.tail(3)[['price', 'high', 'low', 'volume']].to_dict()
+        technical_indicators = X.tail(1).to_dict()
+
         llm_prediction = llm_predictor.predict(
             market_data, technical_indicators, current_price, prediction_days)
 
-        # Extract LLM prediction details
-        llm_lines = llm_prediction.split('\n')
-        llm_pred = next((line.split(
-            ': ')[1] for line in llm_lines if line.startswith('Prediction:')), 'N/A')
-        llm_conf = next((line.split(
-            ': ')[1] for line in llm_lines if line.startswith('Confidence:')), 'N/A')
-        llm_lower_bound = parse_price(next(
-            (line.split('$')[1] for line in llm_lines if '- Lower Bound:' in line), 'N/A'))
-        llm_upper_bound = parse_price(next(
-            (line.split('$')[1] for line in llm_lines if '- Upper Bound:' in line), 'N/A'))
-        llm_reasoning = '\n'.join(llm_lines[llm_lines.index(
-            'Reasoning:') + 1:llm_lines.index('Key Factors:')])
-        llm_key_factors = '\n'.join(
-            llm_lines[llm_lines.index('Key Factors:') + 1:])
-
         # Calculate ML model price range
         ml_lower_bound, ml_upper_bound = prediction_engine.calculate_price_range(
-            df, ml_prediction, max(ml_probabilities), prediction_days)
+            df, ml_prediction, ml_confidence, prediction_days)
 
         # Create rich text for predictions
         ml_prediction_text = Text("Bullish", style="bold green") if ml_prediction == 1 else Text(
             "Bearish", style="bold red")
-        llm_prediction_text = Text(llm_pred, style="bold green") if llm_pred.lower(
-        ) == "bullish" else Text(llm_pred, style="bold red")
+        llm_prediction_text = Text(llm_prediction.get('prediction', 'N/A'), style="bold green") if llm_prediction.get(
+            'prediction', '').lower() == "bullish" else Text(llm_prediction.get('prediction', 'N/A'), style="bold red")
 
         # Print results
         console.print(Panel.fit(
@@ -142,33 +126,36 @@ def main():
         prediction_table = Table(show_header=False, box=None)
         prediction_table.add_row("Machine Learning Model:", "")
         prediction_table.add_row("  Prediction", ml_prediction_text)
-        prediction_table.add_row(
-            "  Confidence", f"{max(ml_probabilities):.2f}")
+        prediction_table.add_row("  Confidence", f"{ml_confidence:.2f}")
         prediction_table.add_row(f"  Estimated Price Range ({prediction_days} day{
                                  's' if prediction_days > 1 else ''}):", "")
         prediction_table.add_row("    Lower Bound", f"${ml_lower_bound:,.2f}")
         prediction_table.add_row("    Upper Bound", f"${ml_upper_bound:,.2f}")
         prediction_table.add_row("Large Language Model:", "")
         prediction_table.add_row("  Prediction", llm_prediction_text)
-        prediction_table.add_row("  Confidence", llm_conf)
+        prediction_table.add_row(
+            "  Confidence", f"{llm_prediction.get('confidence', 'N/A')}")
         prediction_table.add_row(f"  Estimated Price Range ({prediction_days} day{
                                  's' if prediction_days > 1 else ''}):", "")
-        if llm_lower_bound is not None and llm_upper_bound is not None:
+        if 'price_range' in llm_prediction and 'lower' in llm_prediction['price_range'] and 'upper' in llm_prediction['price_range']:
             prediction_table.add_row("    Lower Bound", f"${
-                                     llm_lower_bound:,.2f}")
+                                     llm_prediction['price_range']['lower']:,.2f}")
             prediction_table.add_row("    Upper Bound", f"${
-                                     llm_upper_bound:,.2f}")
+                                     llm_prediction['price_range']['upper']:,.2f}")
         else:
-            prediction_table.add_row("    Price Range", "Unable to parse")
+            prediction_table.add_row("    Price Range", "Unable to calculate")
         console.print(Panel(prediction_table, title=f"Predictions for the Next {
                       prediction_days} Day{'s' if prediction_days > 1 else ''}", expand=False))
 
-        console.print(Panel(Text(llm_reasoning),
-                      title="LLM Reasoning", expand=False))
-        console.print(Panel(Text(llm_key_factors),
-                      title="Key Factors (LLM)", expand=False))
+        if 'reasoning' in llm_prediction:
+            console.print(
+                Panel(Text(llm_prediction['reasoning']), title="LLM Reasoning", expand=False))
+        if 'key_factors' in llm_prediction:
+            console.print(Panel(Text('\n'.join(
+                llm_prediction['key_factors'])), title="Key Factors (LLM)", expand=False))
 
-        feature_importance = prediction_engine.explain_prediction(X)
+        feature_importance = prediction_engine.get_model_diagnostics()[
+            'feature_importance']
         feature_table = Table(show_header=False, box=None)
         for _, row in feature_importance.head().iterrows():
             feature_table.add_row(row['feature'], f"{row['importance']:.4f}")

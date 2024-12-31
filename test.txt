@@ -1,0 +1,142 @@
+DOGECOIN: 2024-12-31
+╭───────────────────────────────────────╮
+│                                       │
+│ Crypto Prediction Report for Dogecoin │
+│                                       │
+╰───────────────────────────────────────╯
+╭──── Market Summary ────╮
+│  Current Price  $0.32  │
+│  24h High       $0.32  │
+│  24h Low        $0.32  │
+╰────────────────────────╯
+╭────── Predictions for the Next 2 Days ───────╮
+│  Machine Learning Model:                     │
+│    Prediction                       Bearish  │
+│    Confidence                       0.91     │
+│    Estimated Price Range (2 days):           │
+│      Lower Bound                    $0.30    │
+│      Upper Bound                    $0.33    │
+│  Large Language Model:                       │
+│    Prediction                       Bullish  │
+│    Confidence                       0.7      │
+│    Estimated Price Range (2 days):           │
+│      Lower Bound                    $0.32    │
+│      Upper Bound                    $0.34    │
+╰──────────────────────────────────────────────╯
+╭────────────────────────────────────────────────────────────────────────────────────────────── LLM Reasoning ──────────────────────────────────────────────────────────────────────────────────────────────╮
+│ The current price of $0.32 is close to the recent high of $0.324378, indicating a positive short-term trend. The market has been consistently bullish over the past few days, as indicated by the         │
+│ positive sentiment value of 0.9869.                                                                                                                                                                       │
+│                                                                                                                                                                                                           │
+│ The recent increase in trading volume, especially on the last day, suggests that there is strong interest in this crypto asset. High volume often leads to continued price increases, as it indicates     │
+│ that more investors are buying the asset.                                                                                                                                                                 │
+│                                                                                                                                                                                                           │
+│ Several technical indicators support a bullish outlook. The trend_macd, trend_sma_fast, and trend_ema_fast values are all above the current price, indicating that the market momentum is still positive. │
+│ Additionally, the trend_vortex_ind_pos value is higher than the trend_vortex_ind_neg value, suggesting that the bullish trend is stronger than the bearish trend.                                         │
+│                                                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────────────── Key Factors (LLM) ────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 1. Recent price movements: The price has been increasing and is close to the recent high.                                                                                                                 │
+│ 2. Trading volume: The volume has increased significantly, indicating strong interest in the asset.                                                                                                       │
+│ 3. Technical indicators: Multiple indicators suggest a bullish trend, including trend_macd, trend_sma_fast, trend_ema_fast, and trend_vortex_ind_pos.                                                     │
+│ 4. Sentiment: The market sentiment is strongly bullish.                                                                                                                                                   │
+│ 5. Moving averages: The short-term moving averages (trend_sma_fast and trend_ema_fast) are above the current price and the long-term moving averages (trend_sma_slow and trend_ema_slow), indicating a    │
+│ bullish trend.                                                                                                                                                                                            │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Top 5 Most Important Features (ML Model) ─╮
+│  high               0.0335                 │
+│  volume             0.0334                 │
+│  low                0.0327                 │
+│  momentum_uo        0.0296                 │
+│  momentum_pvo_hist  0.0288                 │
+╰────────────────────────────────────────────╯
+
+
+DEXE: 2024-12-31
+╭───────────────────────────────────╮
+│                                   │
+│ Crypto Prediction Report for Dexe │
+│                                   │
+╰───────────────────────────────────╯
+╭──── Market Summary ─────╮
+│  Current Price  $14.99  │
+│  24h High       $14.99  │
+│  24h Low        $14.99  │
+╰─────────────────────────╯
+╭────── Predictions for the Next 2 Days ───────╮
+│  Machine Learning Model:                     │
+│    Prediction                       Bearish  │
+│    Confidence                       0.74     │
+│    Estimated Price Range (2 days):           │
+│      Lower Bound                    $13.80   │
+│      Upper Bound                    $15.30   │
+│  Large Language Model:                       │
+│    Prediction                       Bullish  │
+│    Confidence                       0.85     │
+│    Estimated Price Range (2 days):           │
+│      Lower Bound                    $15.20   │
+│      Upper Bound                    $15.80   │
+╰──────────────────────────────────────────────╯
+╭────────────────────────────────────────────────────────────────────────────────────────────── LLM Reasoning ──────────────────────────────────────────────────────────────────────────────────────────────╮
+│ The market has shown a clear uptrend in the past 2 days, with the price increasing from $12.55 to $14.99. This represents a growth of around 18.5%, which is a strong bullish signal. Additionally, the   │
+│ volume has been consistently rising, indicating a growing interest in the asset.                                                                                                                          │
+│                                                                                                                                                                                                           │
+│ The technical indicators also support a bullish outlook. The trend_macd, trend_sma_fast, trend_sma_slow, trend_ema_fast, and trend_ema_slow are all positive, suggesting an upward trend. The             │
+│ trend_vortex_ind_pos is also higher than the trend_vortex_ind_neg, indicating a stronger bullish momentum.                                                                                                │
+│                                                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────────── Key Factors (LLM) ───────────────────────────────────────────────────────╮
+│ 1. Price increase and uptrend: The price has been consistently increasing, and the trend is bullish.                           │
+│ 2. Volume trends: The volume has been rising, indicating growing interest in the asset.                                        │
+│ 3. Positive technical indicators: Most of the technical indicators are positive, suggesting a bullish trend.                   │
+│ 4. Vortex Indicator: The trend_vortex_ind_pos is higher than the trend_vortex_ind_neg, indicating a stronger bullish momentum. │
+│ 5. Moving Averages: The short-term and long-term moving averages are all positive and rising, indicating a bullish trend.      │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Top 5 Most Important Features (ML Model) ─╮
+│  high                  0.0357              │
+│  low                   0.0317              │
+│  trend_dpo             0.0308              │
+│  volume                0.0283              │
+│  momentum_stoch_rsi_d  0.0278              │
+╰────────────────────────────────────────────╯
+
+DEXE: 2024-12-31
+╭───────────────────────────────────╮
+│                                   │
+│ Crypto Prediction Report for Dexe │
+│                                   │
+╰───────────────────────────────────╯
+╭──── Market Summary ─────╮
+│  Current Price  $14.95  │
+│  24h High       $14.95  │
+│  24h Low        $7.38   │
+╰─────────────────────────╯
+╭────── Predictions for the Next 7 Days ───────╮
+│  Machine Learning Model:                     │
+│    Prediction                       Bearish  │
+│    Confidence                       0.75     │
+│    Estimated Price Range (7 days):           │
+│      Lower Bound                    $10.21   │
+│      Upper Bound                    $17.78   │
+│  Large Language Model:                       │
+│    Prediction                       Bullish  │
+│    Confidence                       0.85     │
+│    Estimated Price Range (7 days):           │
+│      Lower Bound                    $15.50   │
+│      Upper Bound                    $16.50   │
+╰──────────────────────────────────────────────╯
+╭─ LLM Reasoning ─╮
+│                 │
+╰─────────────────╯
+╭─────────────────────────── Key Factors (LLM) ───────────────────────────╮
+│ The market is currently trading above both the 50-day and 200-day SMAs. │
+│ Volume has been increasing steadily.                                    │
+│ The trend MACD is positive and rising.                                  │
+│ The RSI is at 66.71, indicating that the market is not overbought.      │
+╰─────────────────────────────────────────────────────────────────────────╯
+╭─ Top 5 Most Important Features (ML Model) ─╮
+│  price_acceleration     0.0303             │
+│  log_return             0.0298             │
+│  volume_ma_ratio        0.0257             │
+│  trend_vortex_ind_diff  0.0249             │
+│  trend_dpo              0.0245             │
+╰────────────────────────────────────────────╯
