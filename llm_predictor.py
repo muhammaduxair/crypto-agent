@@ -16,10 +16,17 @@ class LLMPredictor:
         Technical Indicators:
         {technical_indicators}
 
+        Consider the following in your analysis:
+        1. The relationship between current price and recent highs/lows
+        2. The price range and its percentage relative to the low price
+        3. Volume trends in relation to price movements
+        4. Key technical indicators and their recent changes
+
         Format your response as:
         Prediction: [Bullish/Bearish]
         Confidence: [0-1]
         Reasoning: [Your analysis]
+        Key Factors: [List the top 3-5 factors influencing your prediction]
         """
 
         response = self.client.chat.completions.create(
@@ -32,7 +39,7 @@ class LLMPredictor:
             ],
             model="mixtral-8x7b-32768",
             temperature=0.2,
-            max_tokens=500,
+            max_tokens=800,
         )
 
         return response.choices[0].message.content

@@ -1,11 +1,10 @@
 from data_fetcher import DataFetchingAgent
 from prediction_engine import PredictionEngine
 from llm_predictor import LLMPredictor
-import pandas as pd
-import dotenv
+from dotenv import load_dotenv
 
-# Load environment variables from .env file
-dotenv.load_dotenv()
+# load the environment variables
+load_dotenv()
 
 
 def main():
@@ -17,7 +16,7 @@ def main():
     # Set parameters
     coin_id = 'bitcoin'
     vs_currency = 'usd'
-    days = 7  # Reduced to 7 days for more recent data
+    days = 30
 
     try:
         # Fetch data
@@ -47,7 +46,8 @@ def main():
             latest_data)
 
         # Prepare data for LLM prediction
-        market_data = df.tail(3)[['price', 'volume']].to_string()
+        market_data = df.tail(
+            3)[['price', 'high', 'low', 'volume']].to_string()
         technical_indicators = X.tail(3).to_string()
 
         # Make a prediction using the LLM
@@ -56,6 +56,13 @@ def main():
             market_data, technical_indicators)
 
         # Print results
+        print("\n--- Market Summary ---")
+        print(f"Current Price: ${df['price'].iloc[-1]:.2f}")
+        print(f"24h High: ${df['high'].iloc[-1]:.2f}")
+        print(f"24h Low: ${df['low'].iloc[-1]:.2f}")
+        print(f"24h Price Range: ${df['high'].iloc[-1] - df['low'].iloc[-1]:.2f} ({
+              ((df['high'].iloc[-1] - df['low'].iloc[-1]) / df['low'].iloc[-1] * 100):.2f}%)")
+
         print("\n--- Machine Learning Model Prediction ---")
         print(f"Prediction: {'Bullish' if ml_prediction == 1 else 'Bearish'}")
         print(f"Confidence: {max(ml_probabilities):.2f}")

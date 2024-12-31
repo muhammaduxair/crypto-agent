@@ -24,7 +24,7 @@ class PredictionEngine:
         print(f"Data shape after creating target: {df.shape}")
 
         # Select features for the model
-        features = ['volume', 'sentiment'] + \
+        features = ['volume', 'sentiment', 'high', 'low'] + \
             [col for col in df.columns if col.startswith(
                 'momentum') or col.startswith('trend')]
 
@@ -39,6 +39,10 @@ class PredictionEngine:
 
         # Backward fill any remaining NaN values at the beginning
         X = X.fillna(method='bfill')
+
+        # Calculate additional features
+        X['price_range'] = X['high'] - X['low']
+        X['price_range_pct'] = (X['high'] - X['low']) / X['low']
 
         # Remove any rows that still have NaN values
         mask = X.isna().any(axis=1) | y.isna()
