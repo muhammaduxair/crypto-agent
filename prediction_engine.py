@@ -99,3 +99,25 @@ class PredictionEngine:
         }).sort_values('importance', ascending=False)
 
         return feature_importance
+
+    def calculate_price_range(self, df, prediction, confidence):
+        # Calculate daily returns
+        df['daily_return'] = df['price'].pct_change()
+
+        # Calculate historical volatility (standard deviation of returns)
+        volatility = df['daily_return'].std()
+
+        # Get the current price
+        current_price = df['price'].iloc[-1]
+
+        # Calculate the potential price range
+        lower_bound = current_price * (1 - volatility)
+        upper_bound = current_price * (1 + volatility)
+
+        # Adjust the range based on the prediction and confidence
+        if prediction == 1:  # Bullish
+            lower_bound += (upper_bound - lower_bound) * confidence * 0.5
+        else:  # Bearish
+            upper_bound -= (upper_bound - lower_bound) * confidence * 0.5
+
+        return lower_bound, upper_bound
