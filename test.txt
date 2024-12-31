@@ -140,3 +140,44 @@ DEXE: 2024-12-31
 │  trend_vortex_ind_diff  0.0249             │
 │  trend_dpo              0.0245             │
 ╰────────────────────────────────────────────╯
+
+Bitcoin: 2024-12-31
+╭──────────────────────────────────────╮
+│                                      │
+│ Crypto Prediction Report for Bitcoin │
+│                                      │
+╰──────────────────────────────────────╯
+╭─────── Market Summary ───────╮
+│  Current Price  $93,576.77   │
+│  24h High       $106,074.11  │
+│  24h Low        $92,627.28   │
+╰──────────────────────────────╯
+╭──────── Predictions for the Next 30 Days ─────────╮
+│  Machine Learning Model:                          │
+│    Prediction                        Bearish      │
+│    Confidence                        0.79         │
+│    Estimated Price Range (30 days):               │
+│      Lower Bound                     $62,086.56   │
+│      Upper Bound                     $111,799.31  │
+│  Large Language Model:                            │
+│    Prediction                        Bearish      │
+│    Confidence                        0.75         │
+│    Estimated Price Range (30 days):               │
+│      Lower Bound                     $85,000.00   │
+│      Upper Bound                     $92,000.00   │
+╰───────────────────────────────────────────────────╯
+╭─ LLM Reasoning ─╮
+│                 │
+╰─────────────────╯
+╭──────────────── Key Factors (LLM) ─────────────────╮
+│ Negative trend MACD and related indicators         │
+│ Resistance levels from SMA and EMA values          │
+│ Decreasing volume momentum and low volume MA ratio │
+╰────────────────────────────────────────────────────╯
+╭─ Top 5 Most Important Features (ML Model) ─╮
+│  trend_dpo           0.0340                │
+│  volume_momentum     0.0299                │
+│  momentum_rsi        0.0267                │
+│  price_acceleration  0.0261                │
+│  volume              0.0252                │
+╰────────────────────────────────────────────╯
