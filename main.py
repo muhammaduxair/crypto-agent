@@ -94,12 +94,8 @@ def main():
             latest_data)
 
         current_price = df['price'].iloc[-1]
-        market_data = df.tail(
-            3)[['price', 'high', 'low', 'volume']].to_string()
-        if 'yf_close' in df.columns and 'av_close' in df.columns:
-            market_data += "\n" + \
-                df.tail(3)[['yf_close', 'yf_volume',
-                            'av_close', 'av_volume']].to_string()
+        market_data = df.tail(3)[['price', 'high', 'low', 'volume', 'yf_close', 'yf_volume',
+                                  'av_close', 'av_volume', 'bb_upper', 'bb_middle', 'bb_lower']].to_string()
         technical_indicators = X.tail(3).to_string()
         llm_prediction = llm_predictor.predict(
             market_data, technical_indicators, current_price, prediction_days)
