@@ -6,12 +6,14 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
+from pycoingecko import CoinGeckoAPI
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
 console = Console()
+cg = CoinGeckoAPI()
 
 
 def parse_price(price_str):
@@ -21,20 +23,55 @@ def parse_price(price_str):
         return None
 
 
+def validate_coin_id(coin_id):
+    try:
+        cg.get_coin_by_id(coin_id)
+        return True
+    except Exception:
+        return False
+
+
+def get_user_input(prompt, default, type_func=int):
+    while True:
+        user_input = console.input(
+            f"[bold cyan]{prompt} (default: {default}): [/bold cyan]")
+        if user_input == "":
+            return default
+        try:
+            return type_func(user_input)
+        except ValueError:
+            console.print(f"[bold red]Invalid input. Please enter a valid {
+                          type_func.__name__}.[/bold red]")
+
+
 def main():
     # Initialize agents
     data_agent = DataFetchingAgent()
     prediction_engine = PredictionEngine()
     llm_predictor = LLMPredictor()
 
-    # Set parameters
-    coin_id = 'bitcoin'
+    # Prompt user for inputs
+    coin_id = console.input(
+        "[bold cyan]Enter the coin ID (e.g., bitcoin, ethereum): [/bold cyan]")
+
+    # Validate coin ID
+    if not validate_coin_id(coin_id):
+        console.print(f"[bold red]Error:[/bold red] Invalid coin ID '{
+                      coin_id}'. Please check the ID and try again.")
+        return
+
+    historical_days = get_user_input(
+        "Enter the number of days of historical data to fetch", 30)
+    prediction_days = get_user_input(
+        "Enter the number of days for prediction", 1)
+
     vs_currency = 'usd'
-    days = 30
 
     try:
         # Fetch data
-        df = data_agent.fetch_data(coin_id, vs_currency, days)
+        console.print(
+            f"Fetching {historical_days} days of historical data for {coin_id}...")
+        df = data_agent.fetch_data(coin_id, vs_currency, historical_days)
 
         if df.empty:
             console.print(
@@ -59,9 +96,13 @@ def main():
         current_price = df['price'].iloc[-1]
         market_data = df.tail(
             3)[['price', 'high', 'low', 'volume']].to_string()
+        if 'yf_close' in df.columns and 'av_close' in df.columns:
+            market_data += "\n" + \
+                df.tail(3)[['yf_close', 'yf_volume',
+                            'av_close', 'av_volume']].to_string()
         technical_indicators = X.tail(3).to_string()
         llm_prediction = llm_predictor.predict(
-            market_data, technical_indicators, current_price)
+            market_data, technical_indicators, current_price, prediction_days)
 
         # Extract LLM prediction details
         llm_lines = llm_prediction.split('\n')
@@ -80,7 +121,7 @@ def main():
 
         # Calculate ML model price range
         ml_lower_bound, ml_upper_bound = prediction_engine.calculate_price_range(
-            df, ml_prediction, max(ml_probabilities))
+            df, ml_prediction, max(ml_probabilities), prediction_days)
 
         # Create rich text for predictions
         ml_prediction_text = Text("Bullish", style="bold green") if ml_prediction == 1 else Text(
@@ -107,13 +148,15 @@ def main():
         prediction_table.add_row("  Prediction", ml_prediction_text)
         prediction_table.add_row(
             "  Confidence", f"{max(ml_probabilities):.2f}")
-        prediction_table.add_row("  Estimated Price Range (24h):", "")
+        prediction_table.add_row(f"  Estimated Price Range ({prediction_days} day{
+                                 's' if prediction_days > 1 else ''}):", "")
         prediction_table.add_row("    Lower Bound", f"${ml_lower_bound:,.2f}")
         prediction_table.add_row("    Upper Bound", f"${ml_upper_bound:,.2f}")
         prediction_table.add_row("Large Language Model:", "")
         prediction_table.add_row("  Prediction", llm_prediction_text)
         prediction_table.add_row("  Confidence", llm_conf)
-        prediction_table.add_row("  Estimated Price Range (24h):", "")
+        prediction_table.add_row(f"  Estimated Price Range ({prediction_days} day{
+                                 's' if prediction_days > 1 else ''}):", "")
         if llm_lower_bound is not None and llm_upper_bound is not None:
             prediction_table.add_row("    Lower Bound", f"${
                                      llm_lower_bound:,.2f}")
@@ -121,8 +164,8 @@ def main():
                                      llm_upper_bound:,.2f}")
         else:
             prediction_table.add_row("    Price Range", "Unable to parse")
-        console.print(Panel(prediction_table,
-                      title="Predictions for the Next 24 Hours", expand=False))
+        console.print(Panel(prediction_table, title=f"Predictions for the Next {
+                      prediction_days} Day{'s' if prediction_days > 1 else ''}", expand=False))
 
         console.print(Panel(Text(llm_reasoning),
                       title="LLM Reasoning", expand=False))
