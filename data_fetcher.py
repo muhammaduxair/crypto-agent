@@ -1,40 +1,60 @@
-from data_fetcher import DataFetchingAgent
-from prediction_engine import PredictionEngine
+import requests
+import pandas as pd
+from ta import add_all_ta_features
+from nltk.sentiment import SentimentIntensityAnalyzer
+import nltk
 
-def main():
-    # Initialize agents
-    data_agent = DataFetchingAgent()
-    prediction_engine = PredictionEngine()
+nltk.download('vader_lexicon')
 
-    # Set parameters
-    coin_id = 'bitcoin'
-    vs_currency = 'usd'
-    days = 365
 
-    # Fetch data
-    print(f"Fetching data for {coin_id}...")
-    df = data_agent.fetch_data(coin_id, vs_currency, days)
+class DataFetchingAgent:
+    def __init__(self):
+        self.base_url = "https://api.coingecko.com/api/v3"
+        self.sia = SentimentIntensityAnalyzer()
 
-    # Prepare data and train the model
-    print("Preparing data and training the model...")
-    X, y = prediction_engine.prepare_data(df)
-    prediction_engine.train(X, y)
+    def fetch_data(self, coin_id, vs_currency, days):
+        # Fetch price data
+        url = f"{self.base_url}/coins/{coin_id}/market_chart"
+        params = {
+            "vs_currency": vs_currency,
+            "days": days
+        }
+        response = requests.get(url, params=params)
+        data = response.json()
 
-    # Make a prediction for the next day
-    print("Making a prediction for the next day...")
-    latest_data = X.iloc[-1].to_frame().T
-    prediction, probabilities = prediction_engine.predict(latest_data)
+        # Create DataFrame
+        df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
+        df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+        df.set_index('timestamp', inplace=True)
 
-    # Explain the prediction
-    feature_importance = prediction_engine.explain_prediction(X)
+        print(f"Raw data shape: {df.shape}")
+        print(df.head())
+        print(f"Columns: {df.columns}")
 
-    # Print results
-    print(f"\nPrediction for {coin_id} in the next 24 hours:")
-    print(f"{'Bullish' if prediction == 1 else 'Bearish'} with {probabilities[prediction]:.2f} probability")
+        # Add volume data
+        df['volume'] = [x[1] for x in data['total_volumes']]
 
-    print("\nTop 5 most important features:")
-    print(feature_importance.head())
+        # Fetch and add sentiment data
+        sentiment_data = self.fetch_sentiment(coin_id)
+        df['sentiment'] = sentiment_data
 
-if __name__ == "__main__":
-    main()
+        # Add technical indicators
+        df = add_all_ta_features(
+            df, open="price", high="price", low="price", close="price", volume="volume")
 
+        print(f"Data shape after adding indicators: {df.shape}")
+        print(df.head())
+        print(f"Columns: {df.columns}")
+
+        return df
+
+    def fetch_sentiment(self, coin_id):
+        url = f"{self.base_url}/coins/{coin_id}"
+        response = requests.get(url)
+        data = response.json()
+
+        # Extract relevant text for sentiment analysis
+        text = data['description']['en']
+        sentiment_score = self.sia.polarity_scores(text)['compound']
+
+        return sentiment_score
