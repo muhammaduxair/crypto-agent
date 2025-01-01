@@ -1,0 +1,182 @@
+=========================================== BNB ================================================
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Cryptocurrency Prediction Agent                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Enter cryptocurrency pair (e.g., BTC/USDT): BNB/USDT
+Select timeframe for technical analysis (1d, 1w, 1m): 1d
+Select prediction timeframe (1d, 1w, 1m, 3m): w
+Fetching technical indicators... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Fetching news sentiment... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Generating LLM predictions... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Prediction Results for BNB/USDT                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+       Technical Indicators       
+┏━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┓
+┃ Indicator   ┃ Value  ┃ Signal  ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━┩
+│ Close Price │ 705.30 │ -       │
+│ SMA_20      │ 697.37 │ Bullish │
+│ EMA_20      │ 695.99 │ Bullish │
+│ RSI         │ 54.60  │ Neutral │
+│ MACD        │ 6.16   │ Bearish │
+│ MACD Signal │ 6.34   │ -       │
+└─────────────┴────────┴─────────┘
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ News Sentiment: 0.13                                                                                                                                                                                      │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                  Recent News Headlines                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┓
+┃ Title                                                                                            ┃ Source             ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━┩
+│ BNB soars post-Revolut listing, Solana rises, Lunex takes off                                    │ The Times of India │
+│ 2024 The Year Of Crypto: From Bitcoin ETFs To Memecoins                                          │ Forbes             │
+│ XRP Volumes Zoom Ahead of Bitcoin, Dogecoin in South Korea. What’s Next?                         │ CoinDesk           │
+│ Don't Expect Bitcoin Fireworks Ahead of New Year, Traders Say, as BTC ETFs Lose $420M            │ CoinDesk           │
+│ RCOF Becomes Safe Haven with 43,132% Price Projections, Stellar and Solana Face Further Declines │ ZyCrypto           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┴────────────────────┘
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ LLM Predictions for w                                                                                                                                                                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Based on the provided data, I will generate a comprehensive price prediction for BNB/USDT for the short-term timeframe (next week).
+
+**Price Range Prediction:**
+Low: 680 - 690
+High: 720 - 730
+
+**Confidence Level:** Medium
+
+**Detailed Explanation:**
+
+**Technical Indicators:**
+
+* The SMA_20 and EMA_20 indicators are both signaling bullish, indicating a short-term uptrend. This suggests that the price is likely to continue moving upwards in the short term.
+* The RSI is neutral, which indicates that the price is not overbought or oversold, leaving room for further movement in either direction.
+* The MACD is bearish, but the signal line is close to the MACD, indicating a potential crossover, which could lead to a bullish signal.
+
+**Market Sentiment and News Impact:**
+
+* The news sentiment score is slightly positive, indicating a neutral to slightly bullish market sentiment.
+* Recent news headlines
+
+
+=========================================== BTC ================================================
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Cryptocurrency Prediction Agent                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Enter cryptocurrency pair (e.g., BTC/USDT): BTC/USDT
+Select timeframe for technical analysis (1d, 1w, 1m): 1d
+Select prediction timeframe (1d, 1w, 1m, 3m): w
+Fetching technical indicators... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Fetching news sentiment... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Generating LLM predictions... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Prediction Results for BTC/USDT                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+        Technical Indicators        
+┏━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┓
+┃ Indicator   ┃ Value    ┃ Signal  ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━┩
+│ Close Price │ 93424.44 │ -       │
+│ SMA_20      │ 97967.31 │ Bearish │
+│ EMA_20      │ 96209.03 │ Bearish │
+│ RSI         │ 33.16    │ Neutral │
+│ MACD        │ -807.93  │ Bearish │
+│ MACD Signal │ 94.65    │ -       │
+└─────────────┴──────────┴─────────┘
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ News Sentiment: 0.16                                                                                                                                                                                      │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                      Recent News Headlines
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
+┃ Title                                                                                                         ┃ Source         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━┩
+│ Ether Seen Outperforming Bitcoin in 2025, Steno Research Says                                                 │ CoinDesk       │
+│ Veteran Trader Peter Brandt Issues Bitcoin Alert, Warns BTC Is Flashing Bearish Signal – Here Are His Targets │ The Daily Hodl │
+│ 2025 Bitcoin Price Prediction + 2 Meme Coins to Watch                                                         │ Bitcoinist     │
+│ Best Altcoins In 2025: Top Analyst Reveals His Picks                                                          │ newsBTC        │
+│ Bitcoin Revolution: NYDIG About To Unlock The Largest Capital Pool In Finance                                 │ Bitcoinist     │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────────┘
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ LLM Predictions for w                                                                                                                                                                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+**Price Prediction for BTC/USDT (Weekly Timeframe)**
+
+**Price Range Prediction:** 84,000 - 96,000
+
+**Confidence Level:** Medium
+
+**Detailed Explanation:**
+
+Based on the provided technical indicators, market data, news sentiment, and recent headlines, I predict a price range of 84,000 to 96,000 for BTC/USDT in the weekly timeframe.
+
+**Key Technical Indicators:**
+
+* The bearish signals from SMA_20 and EMA_20 indicate a short-term downtrend, which is supported by the MACD signal line, suggesting a potential continuation of the bearish momentum.
+* The RSI, although neutral, is close to oversold territory, which could lead to a bounce or a reversal in the short term.
+
+**Market Sentiment and News Impact:**
+
+* The news sentiment score of 0.16 indicates a slightly positive sentiment, which could be a contrarian indicator, as the market often reacts opposite to
+
+
+=========================================== XRP ================================================
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Cryptocurrency Prediction Agent                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Enter cryptocurrency pair (e.g., BTC/USDT): XRP/USDT
+Select timeframe for technical analysis (1d, 1w, 1m): 1d
+Select prediction timeframe (1d, 1w, 1m, 3m): w
+Fetching technical indicators... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Fetching news sentiment... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Generating LLM predictions... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Prediction Results for XRP/USDT                                                                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+      Technical Indicators       
+┏━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━┓
+┃ Indicator   ┃ Value ┃ Signal  ┃
+┡━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━┩
+│ Close Price │ 2.12  │ -       │
+│ SMA_20      │ 2.27  │ Bearish │
+│ EMA_20      │ 2.18  │ Bearish │
+│ RSI         │ 36.16 │ Neutral │
+│ MACD        │ 0.02  │ Bearish │
+│ MACD Signal │ 0.08  │ -       │
+└─────────────┴───────┴─────────┘
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ News Sentiment: 0.03                                                                                                                                                                                      │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                  Recent News Headlines
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Title                                                                                            ┃ Source              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ XRP Volumes Zoom Ahead of Bitcoin, Dogecoin in South Korea. What’s Next?                         │ Biztoc.com          │
+│ XRP Volumes Zoom Ahead of Bitcoin, Dogecoin in South Korea. What’s Next?                         │ CoinDesk            │
+│ Don't Expect Bitcoin Fireworks Ahead of New Year, Traders Say, as BTC ETFs Lose $420M            │ CoinDesk            │
+│ RCOF Becomes Safe Haven with 43,132% Price Projections, Stellar and Solana Face Further Declines │ ZyCrypto            │
+│ China-linked actors hacked US Treasury Department                                                │ Securityaffairs.com │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┴─────────────────────┘
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ LLM Predictions for w                                                                                                                                                                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Based on the provided data, I will generate a comprehensive price prediction for XRP/USDT for the next week.
+
+**Price Range Prediction:**
+Low: 1.95
+High: 2.35
+
+**Confidence Level:**
+Medium
+
+**Detailed Explanation:**
+
+a. **Key Technical Indicators:**
+The bearish signals from SMA_20 and EMA_20 indicate a short-term downtrend, which is further supported by the bearish MACD signal. However, the RSI is neutral, suggesting that the asset is not oversold    
+yet. This mix of bearish and neutral signals suggests a potential consolidation phase.
+
+b. **Market Sentiment and News Impact:**
+The news sentiment score is neutral, indicating that the recent news headlines have not had a significant impact on the market sentiment. The positive news about XRP volumes in South Korea could provide   
+some support, but it is not strong enough to reverse the current downtrend.
+
+c. **Potential Catalysts or
