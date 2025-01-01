@@ -136,7 +136,7 @@ class CryptoPredictionAgent:
 
         try:
             # Handle NaN values
-            self.df['close'] = self.df['close'].ffill().bfill()
+            self.df['close'] = self.df['close'].ffill()
 
             # Add technical indicators with error checking
             self.df['RSI'] = ta.rsi(self.df['close'])
@@ -145,7 +145,7 @@ class CryptoPredictionAgent:
             self.df['SMA_50'] = ta.sma(self.df['close'], length=50)
 
             # Fill any remaining NaN values
-            self.df = self.df.fillna().bfill()
+            self.df = self.df.ffill().bfill()
 
         except Exception as e:
             raise Exception(
