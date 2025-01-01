@@ -46,7 +46,7 @@ def fetch_technical_indicators(exchange, symbol, timeframe):
         task = progress.add_task(
             "[cyan]Fetching technical indicators...", total=100)
 
-        ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=100)
+        ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=365)
         df = pd.DataFrame(
             ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
         df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
@@ -130,23 +130,41 @@ def generate_llm_predictions(technical_data, news_sentiment, symbol, top_article
 
         # Prepare input context for the LLM
         context = f"""
-        Technical Indicators for {symbol}:
-        Latest Close Price: {technical_data['close'].iloc[-1]}
-        SMA_20: {technical_data['SMA_20'].iloc[-1]} (Signal: {technical_data['SMA_Signal'].iloc[-1]})
-        EMA_20: {technical_data['EMA_20'].iloc[-1]} (Signal: {technical_data['EMA_Signal'].iloc[-1]})
-        RSI: {technical_data['RSI'].iloc[-1]} (Signal: {technical_data['RSI_Signal'].iloc[-1]})
-        MACD: {technical_data['MACD'].iloc[-1]} (Signal: {technical_data['MACD_Signal'].iloc[-1]})
-        MACD Signal: {technical_data['Signal'].iloc[-1]}
+        You are an expert cryptocurrency technical analyst with years of experience in market analysis and prediction. Your task is to analyze the provided data and generate a well-reasoned price prediction for {symbol}.
 
-        News Sentiment: {news_sentiment}
+        Technical Indicators for {symbol}:
+        1. Latest Close Price: {technical_data['close'].iloc[-1]:.2f}
+        2. SMA_20: {technical_data['SMA_20'].iloc[-1]:.2f} (Signal: {technical_data['SMA_Signal'].iloc[-1]})
+        3. EMA_20: {technical_data['EMA_20'].iloc[-1]:.2f} (Signal: {technical_data['EMA_Signal'].iloc[-1]})
+        4. RSI: {technical_data['RSI'].iloc[-1]:.2f} (Signal: {technical_data['RSI_Signal'].iloc[-1]})
+        5. MACD: {technical_data['MACD'].iloc[-1]:.2f} (Signal: {technical_data['MACD_Signal'].iloc[-1]})
+        6. MACD Signal Line: {technical_data['Signal'].iloc[-1]:.2f}
+
+        Additional Market Data:
+        7. 24h Price Change: {((technical_data['close'].iloc[-1] / technical_data['close'].iloc[-2]) - 1) * 100:.2f}%
+        8. 7-day Price Change: {((technical_data['close'].iloc[-1] / technical_data['close'].iloc[-7]) - 1) * 100:.2f}%
+        9. 30-day Price Change: {((technical_data['close'].iloc[-1] / technical_data['close'].iloc[-30]) - 1) * 100:.2f}%
+        10. 24h Trading Volume: {technical_data['volume'].iloc[-1]:,.0f}
+
+        Market Sentiment:
+        11. News Sentiment Score: {news_sentiment:.2f} (-1 to 1, where -1 is very negative, 0 is neutral, and 1 is very positive)
 
         Recent News Headlines:
         {' '.join([f"- {article['title']}" for article in top_articles])}
 
-        Based on the above technical indicators, news sentiment, and recent headlines, provide a price prediction for {symbol} for the following timeframe:
-        {prediction_timeframe}
+        Based on the above technical indicators, market data, news sentiment, and recent headlines, provide a comprehensive price prediction for {symbol} for the following timeframe: {prediction_timeframe}
 
-        Provide a price range (low and high), a confidence level (low, medium, high), and a brief explanation for your prediction.
+        Your analysis should include:
+        1. A price range prediction (low and high)
+        2. A confidence level (low, medium, high) for your prediction
+        3. A detailed explanation of your prediction, including:
+           a. Key technical indicators influencing your decision
+           b. Interpretation of market sentiment and news impact
+           c. Potential catalysts or risks that could affect the price
+           d. Any patterns or trends you've identified in the data
+        4. Recommended trading strategy based on your analysis (e.g., buy, sell, hold)
+
+        Remember to consider both bullish and bearish scenarios in your analysis. Your prediction should be well-reasoned, data-driven, and reflect your expertise in technical analysis and cryptocurrency markets.
         """
 
         client = setup_ai_client()
