@@ -170,7 +170,7 @@ def generate_llm_predictions(technical_data, news_sentiment, symbol, top_article
         client = setup_ai_client()
         response = client.chat.completions.create(
             messages=[{"role": "user", "content": context}],
-            model="mixtral-8x7b-32768",
+            model="llama3-70b-8192",
             temperature=0.2,
             max_tokens=200
         )
