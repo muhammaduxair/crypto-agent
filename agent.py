@@ -4,9 +4,8 @@ import pandas_ta as ta
 import plotext as plt
 from rich.console import Console
 from rich.table import Table
-from rich.panel import Panel
 from rich.prompt import Prompt
-from rich import print as rprint
+from rich import print
 from groq import Groq
 from prophet import Prophet
 import os
@@ -237,7 +236,7 @@ class CryptoPredictionAgent:
             response = self.client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
                 model="mixtral-8x7b-32768",
-                temperature=0.7,
+                temperature=0.2,
                 max_tokens=200
             )
 
